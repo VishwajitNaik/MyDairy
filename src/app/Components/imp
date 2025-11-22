@@ -1,0 +1,214 @@
+
+// "use client";
+
+// import { useEffect, useRef } from "react";
+// import Image from "next/image";
+// import { gsap } from "gsap";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// gsap.registerPlugin(ScrollTrigger);
+
+// export default function Home() {
+//   const spotlightImgRefs = useRef([]);
+  
+//   // Initialize refs array
+//   useEffect(() => {
+//     spotlightImgRefs.current = spotlightImgRefs.current.slice(0, 4);
+//   }, []);
+
+//   useEffect(() => {
+//     // Create ScrollTrigger for spotlight effect
+//     const scrollTrigger = ScrollTrigger.create({
+//       trigger: ".spotlight-section",
+//       start: "top top",
+//       end: `${window.innerHeight * 6}px`,
+//       pin: true,
+//       pinSpacing: true,
+//       scrub: 1,
+      
+//       onUpdate: (self) => {
+//         const progress = self.progress;
+
+//         const initialRotations = [8, -6, 7, -5];
+//         const phaseOneStartOffsets = [0, 0.08, 0.16, 0.24]; // Faster sequential start
+//         const spotlightImgFinalPos = [
+//           [-180, -120],  // Much wider spread
+//           [160, -140],
+//           [-200, 120],
+//           [180, 100],
+//         ];
+
+//         spotlightImgRefs.current.forEach((img, index) => {
+//           if (!img) return;
+
+//           const initialRotation = initialRotations[index];
+//           const phase1Start = phaseOneStartOffsets[index];
+//           const phase1End = Math.min(phase1Start + (0.35 - phase1Start) * 0.9, 0.35); // Faster first phase
+
+//           let x = 0;
+//           let y, rotation;
+
+//           if (progress < phase1Start) {
+//             y = 150;  // Start further below
+//             rotation = initialRotation;
+//           } else if (progress < phase1End) {
+//             let phase1Progress;
+
+//             if (progress >= phase1End) {
+//               phase1Progress = 1;
+//             } else {
+//               const linearProgress = (progress - phase1Start) / (phase1End - phase1Start);
+//               phase1Progress = 1 - Math.pow(1 - linearProgress, 2); // Faster easing
+//             }
+
+//             y = 150 - phase1Progress * 200;
+//             rotation = initialRotation;
+//           } else {
+//             y = 0;
+//             rotation = initialRotation;
+//           }
+
+//           const phaseTwoStartOffsets = [0.4, 0.45, 0.5, 0.55]; // Earlier second phase
+//           const phase2Start = phaseTwoStartOffsets[index];
+//           const phase2End = Math.min(phase2Start + (0.85 - phase2Start) * 0.9, 0.85);
+
+//           const [finalX, finalY] = spotlightImgFinalPos[index];
+
+//           if (progress >= phase2Start && progress < 0.95) {
+//             let phase2Progress;
+
+//             if (progress >= phase2End) {
+//               phase2Progress = 1;
+//             } else {
+//               const linearProgress = (progress - phase2Start) / (phase2End - phase2Start);
+//               phase2Progress = 1 - Math.pow(1 - linearProgress, 2); // Faster easing
+//             }
+
+//             x = 0 + phase2Progress * finalX;
+//             y = 0 + phase2Progress * finalY;
+//             rotation = initialRotation * (1 - phase2Progress);
+//           } else if (progress >= 0.95) {
+//             x = finalX;
+//             y = finalY;
+//             rotation = 0;
+//           }
+
+//           gsap.set(img, {
+//             x: x + "%",
+//             y: y + "%",
+//             rotation: rotation,
+//             scale: progress > 0.9 ? 0.9 : 1 // Slight scale down when spread out
+//           });
+//         });
+//       }
+//     });
+
+//     return () => {
+//       if (scrollTrigger) scrollTrigger.kill();
+//     };
+//   }, []);
+
+//   // Helper function to add ref to array
+//   const addToRefs = (el, index) => {
+//     if (el && !spotlightImgRefs.current.includes(el)) {
+//       spotlightImgRefs.current[index] = el;
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-zinc-50 dark:bg-black p-4 space-y-16">
+      
+//       <div className="flex items-center justify-center py-16">
+//         <h1 className="text-4xl font-bold text-center">Scroll Down 👇</h1>
+//       </div>
+
+//       {/* Spotlight Section with Smaller Cards */}
+//       <div className="spotlight-section relative h-screen w-full overflow-hidden">
+//         <div className="absolute inset-0 flex items-center justify-center">
+//           {/* Smaller Image 1 */}
+//           <div className="absolute">
+//             <Image
+//               ref={(el) => addToRefs(el, 0)}
+//               src="https://picsum.photos/600/400"
+//               width={600}
+//               height={400}
+//               alt="Dummy Image 1"
+//               className="rounded-xl shadow-xl"
+//             />
+//           </div>
+
+//           {/* Smaller Image 2 */}
+//           <div className="absolute">
+//             <Image
+//               ref={(el) => addToRefs(el, 1)}
+//               src="https://picsum.photos/600/400"
+//               width={600}
+//               height={400}
+//               alt="Dummy Image 2"
+//               className="rounded-xl shadow-xl"
+//             />
+//           </div>
+
+//           {/* Smaller Image 3 */}
+//           <div className="absolute">
+//             <Image
+//               ref={(el) => addToRefs(el, 2)}
+//               src="https://picsum.photos/600/400"
+//               width={600}
+//               height={400}
+//               alt="Dummy Image 3"
+//               className="rounded-xl shadow-xl"
+//             />
+//           </div>
+
+//           {/* Smaller Image 4 */}
+//           <div className="absolute">
+//             <Image
+//               ref={(el) => addToRefs(el, 3)}
+//               src="https://picsum.photos/600/400"
+//               width={600}
+//               height={400}
+//               alt="Dummy Image 4"
+//               className="rounded-xl shadow-xl"
+//             />
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Additional content after spotlight section */}
+//       <div className="flex items-center justify-center py-16">
+//         <h2 className="text-3xl font-bold text-center">Continue Scrolling 👇</h2>
+//       </div>
+
+//       {/* Regular smaller images outside spotlight effect */}
+//       <div className="flex items-center justify-center">
+//         <div className="w-full max-w-2xl">
+//           <Image
+//             src="https://picsum.photos/600/400"
+//             width={600}
+//             height={400}
+//             alt="Dummy Image 5"
+//             className="rounded-xl shadow-xl w-full h-auto"
+//           />
+//         </div>
+//       </div>
+
+//       <div className="flex items-center justify-center">
+//         <div className="w-full max-w-2xl">
+//           <Image
+//             src="https://picsum.photos/600/400"
+//             width={600}
+//             height={400}
+//             alt="Dummy Image 6"
+//             className="rounded-xl shadow-xl w-full h-auto"
+//           />
+//         </div>
+//       </div>
+
+//       <div className="flex items-center justify-center py-16">
+//         <h2 className="text-3xl font-bold text-center">That's All! 🎉</h2>
+//       </div>
+//     </div>
+//   );
+// }
+

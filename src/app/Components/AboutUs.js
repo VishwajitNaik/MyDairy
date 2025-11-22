@@ -383,10 +383,10 @@ export default function AboutPage2({ active }) {
 
   // Array of 4 different images
   const images = [
-    "https://picsum.photos/1000/800?random=22",
-    "https://picsum.photos/1000/800?random=23", 
-    "https://picsum.photos/1000/800?random=24",
-    "https://picsum.photos/1000/800?random=25"
+    "/assets/card1.png",
+    "/assets/card2.png", 
+    "/assets/card3.png",
+    "/assets/card4.png"
   ];
 
   const addTextToRefs = (el, index) => {
@@ -650,7 +650,7 @@ export default function AboutPage2({ active }) {
         <div className="md:col-span-5 col-span-1 flex items-center justify-center">
           <div
             ref={imageContainerRef}
-            className="w-full max-w-md rounded-2xl overflow-hidden shadow-2xl border border-white/20 transform-gpu bg-white/5 backdrop-blur-sm"
+            className="w-full max-w-md "
             style={{ transformStyle: 'preserve-3d', willChange: 'transform' }}
           >
             <img

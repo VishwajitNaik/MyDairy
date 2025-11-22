@@ -1,6 +1,7 @@
 // components/MilkProductsCarousel.jsx
 'use client';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 const MilkProductsCarousel = () => {
   const [currentCard, setCurrentCard] = useState(0);
@@ -11,7 +12,7 @@ const MilkProductsCarousel = () => {
     {
       id: 1,
       title: "FRESH COW MILK",
-      image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=500&h=400&fit=crop",
+      image: "assets/card1.png",
       logo: "🥛",
       description: "100% pure cow milk from grass-fed cows raised in natural environments",
       price: "₹45/L",
@@ -24,7 +25,7 @@ const MilkProductsCarousel = () => {
     {
       id: 2,
       title: "BUFFALO MILK",
-      image: "https://images.unsplash.com/photo-1576186726115-4d51596775d1?w=500&h=400&fit=crop",
+      image: "assets/card2.png",
       logo: "🐃",
       description: "Creamy buffalo milk with high fat content perfect for traditional sweets",
       price: "₹60/L",
@@ -37,7 +38,7 @@ const MilkProductsCarousel = () => {
     {
       id: 3,
       title: "ORGANIC MILK",
-      image: "https://images.unsplash.com/photo-1550583722-d6edd2c73c78?w=500&h=400&fit=crop",
+      image: "assets/card3.png",
       logo: "🌿",
       description: "Certified organic milk from pesticide-free farms with ethical farming",
       price: "₹80/L",
@@ -50,7 +51,7 @@ const MilkProductsCarousel = () => {
     {
       id: 4,
       title: "LOW FAT MILK",
-      image: "https://images.unsplash.com/photo-1576186726115-4d51596775d1?w=500&h=400&fit=crop",
+      image: "assets/card4.png",
       logo: "⚖️",
       description: "Perfect for weight management and healthy lifestyle without compromising nutrition",
       price: "₹50/L",
@@ -63,7 +64,7 @@ const MilkProductsCarousel = () => {
     {
       id: 5,
       title: "FLAVORED MILK",
-      image: "https://images.unsplash.com/photo-1570194065650-47de85d1f476?w=500&h=400&fit=crop",
+      image: "assets/img3.png",
       logo: "🍫",
       description: "Delicious flavored milk in various tastes that kids and adults love",
       price: "₹55/L",
@@ -76,7 +77,7 @@ const MilkProductsCarousel = () => {
     {
       id: 6,
       title: "FORTIFIED MILK",
-      image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=500&h=400&fit=crop",
+      image: "assets/img4.png",
       logo: "💪",
       description: "Extra nutrients added for better health and complete nutrition",
       price: "₹65/L",
